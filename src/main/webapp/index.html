@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Angular EE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="js/libs/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="js/libs/twitter-bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+        <!--  <link href="css/starter-template.css" rel="stylesheet" type="text/css"/>-->
+    </head>
+    <body ng-app="myApp">
+        <!--  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+              <div class="container">
+                  <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="#">Angular EE</a>
+                  </div>
+                  <div id="navbar" class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav">
+                          <li class="active"><a href="#/home">Home</a></li>
+                          <li><a href="#/view1">List Customers</a></li>
+                          <li><a href="#/chart">Linear Chart Demo</a></li>
+                          <li><a href="#/chart2">Pie Chart Demo</a></li>
+                          <li><a href="#/view2">Test Angular</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </nav>-->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/home">Angular EE</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#/home">Home</a></li>
+                        <li><a href="#/view1">Customers</a></li>
+                        <li><a href="#/view2">Demo</a></li>
+                        <li><a href="#/secure">Secure</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Amcharts<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#/chart">LineChart</a></li>
+                                <li><a href="#/chart2">PieCharts</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#/login">Login</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container">
+            <div class="starter-template">
+                <div ng-view></div>
+            </div>
+            <div class="alerts">
+                <div ng-repeat="alert in alerts" class="alert alert-{{alert.type}} animation">
+                    <button type="button" class="close" ng-click="alert.close()" aria-hidden="true">×</button>
+
+                    <h4>{{alert.title}}</h4>
+                    {{alert.msg}}
+
+                </div>
+            </div>
+        </div>
+        <script src="js/libs/jquery/jquery.js" type="text/javascript"></script>
+        <script src="js/libs/twitter-bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/libs/angular.js/angular.js" type="text/javascript"></script>
+        <script src="js/libs/angular-ui-bootstrap/ui-bootstrap.js" type="text/javascript"></script>
+        <script src="js/libs/angular.js/angular-resource.js" type="text/javascript"></script>
+        <script src="js/libs/angular.js/angular-route.js" type="text/javascript"></script>
+        <script src="js/libs/angular.js/angular-animate.js" type="text/javascript"></script>
+        <script src="js/libs/restangular/restangular.js" type="text/javascript"></script>
+        <script src="js/libs/underscore.js/underscore.js" type="text/javascript"></script>
+        <script src="js/app.js" type="text/javascript"></script>
+        <script src="js/services/services.js" type="text/javascript"></script>
+        <script src="js/controllers/controllers.js" type="text/javascript"></script>
+        <script src="js/directives/directives.js" type="text/javascript"></script>
+        <script src="js/libs/amcharts/amcharts.js" type="text/javascript"></script>
+        <script src="js/libs/amcharts/serial.js" type="text/javascript"></script>
+        <script src="js/libs/amcharts/pie.js" type="text/javascript"></script>
+
+        <!--  <div login-dialog ng-if="!isLoginPage"></div>-->
+
+    </body>
+</html>
