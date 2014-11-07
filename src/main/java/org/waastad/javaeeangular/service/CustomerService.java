@@ -29,7 +29,6 @@ import org.waastad.javaeeangular.model.Customer;
  * @author Helge Waastad <helge.waastad@waastad.org>
  */
 @Path("customer")
-@Singleton
 @Produces(MediaType.APPLICATION_JSON)
 @Slf4j
 public class CustomerService {

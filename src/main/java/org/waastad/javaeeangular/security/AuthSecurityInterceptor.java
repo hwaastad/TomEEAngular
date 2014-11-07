@@ -11,11 +11,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -30,6 +32,7 @@ import org.waastad.javaeeangular.model.AuthAccessElement;
  * @author Helge Waastad <helge.waastad@waastad.org>
  */
 @Provider
+//@PreMatching
 @Slf4j
 public class AuthSecurityInterceptor implements ContainerRequestFilter {
 
@@ -41,11 +44,20 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
     @Context
     private ResourceInfo resourceInfo;
 
-    @EJB
+    @Inject
     private AuthServiceBeanLocal authServiceBeanLocal;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
+        String path = requestContext.getUriInfo().getPath();
+        log.info("Filtering request path: " + path);
+        // Response OK before filtering...
+        if (requestContext.getRequest().getMethod().equals("OPTIONS")) {
+            log.info("Returning OK for OPTIONS request");
+            requestContext.abortWith(Response.status(Response.Status.OK).build());
+            return;
+        }
+
         String authId = requestContext.getHeaderString(AuthAccessElement.PARAM_AUTH_ID);
         String authToken = requestContext.getHeaderString(AuthAccessElement.PARAM_AUTH_TOKEN);
         log.info("Filter: {} {}", authId, authToken);
@@ -55,16 +67,9 @@ public class AuthSecurityInterceptor implements ContainerRequestFilter {
             log.info("Method is protected..");
             RolesAllowed rolesAllowedAnnotation = methodInvoked.getAnnotation(RolesAllowed.class);
             Set<String> rolesAllowed = new HashSet<>(Arrays.asList(rolesAllowedAnnotation.value()));
-//            try {
-//                authServiceBeanLocal = (AuthServiceBeanLocal) new InitialContext().lookup("java:global/AuthServiceBean!org.waastad.javaeeangular.ejb.AuthServiceBeanLocal");
-
             if (!authServiceBeanLocal.isAuthorized(authId, authToken, rolesAllowed)) {
                 requestContext.abortWith(ACCESS_UNAUTHORIZED);
             }
-//            } catch (NamingException e) {
-//                log.error("Error: {}", ExceptionUtils.getRootCauseMessage(e));
-//                requestContext.abortWith(ACCESS_UNAUTHORIZED);
-//            }
         } else {
             log.info("Method is NOT protected..");
         }

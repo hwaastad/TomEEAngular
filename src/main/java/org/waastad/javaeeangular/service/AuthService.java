@@ -25,7 +25,6 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
  * @author Helge Waastad <helge.waastad@waastad.org>
  */
 @Path("auth")
-@Singleton
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 @Slf4j
