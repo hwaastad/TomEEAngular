@@ -84,11 +84,22 @@ myControllers.controller('LoginController', ['$scope', 'AuthService', '$location
                 console.log('LoginController: login Fail: ' + response.status);
             });
         };
-        $scope.logout=function (user){
-            AuthService.logout().then(function (){
+        $scope.logout = function () {
+            AuthService.logout().then(function () {
                 AlertService.add('success', 'Success', 'LoginController: logout OK');
             });
         };
 
+    }]);
+
+myControllers.controller('NavigationController', ['$rootScope', '$scope', '$location', 'AuthService', 'AlertService', function ($rootScope, $scope, $location, $window, AuthService, AlertService) {
+        $scope.logout = function () {
+            AuthService.logout(function () {
+                $location.path('/login');
+            }),
+                    function () {
+                        AlertService.add('danger', 'Danger', 'NavigationController: logout failed');
+                    };
+        };
     }]);
 

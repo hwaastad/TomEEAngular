@@ -127,3 +127,12 @@ myDirectives.directive('loginDialog', function (AUTH_EVENTS) {
         }
     };
 });
+
+myDirectives.directive('accessLevel',['LoginController',function (LoginController){
+    return {
+        restrict: 'A',
+        link: function ($scope,element,attrs){
+            
+        }
+    }    
+}]);
