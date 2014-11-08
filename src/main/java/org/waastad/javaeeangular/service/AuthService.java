@@ -10,6 +10,7 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,10 +30,10 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
 @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 @Slf4j
 public class AuthService {
-
+    
     @Inject
     private AuthServiceBeanLocal authServiceBeanLocal;
-
+    
     @POST
     @PermitAll
     public AuthAccessElement login(@Context HttpServletRequest request, AuthLoginElement loginElement) {
@@ -45,5 +46,12 @@ public class AuthService {
             request.getSession().setAttribute(AuthAccessElement.PARAM_AUTH_TOKEN, login.getAuthToken());
         }
         return login;
+    }
+    
+    @DELETE
+    @PermitAll
+    public void logout(@Context HttpServletRequest requestContext) {
+        String authToken = requestContext.getHeader(AuthAccessElement.PARAM_AUTH_TOKEN);
+        log.info("I will log {} out...", authToken);
     }
 }

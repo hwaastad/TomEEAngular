@@ -19,26 +19,31 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
 @Stateless
 @Slf4j
 public class AuthServiceBean implements AuthServiceBeanLocal {
-    
+
     @Override
     public AuthAccessElement login(AuthLoginElement loginElement) {
         log.info("Log in user: {}", loginElement.getUsername());
         //Lookup User from db and create token etc if not null and save user with token.....
         return new AuthAccessElement(loginElement.getUsername(), UUID.randomUUID().toString(), "admin");
-        
+
         // oterwise return null
     }
 
     @Override
     public boolean isAuthorized(String authId, String authToken, Set<String> rolesAllowed) {
-        log.info("Returing true....");
+        if (authId == null || authToken == null) {
+            log.warn("Request is missing important headers....");
+            return false;
+        } else {
+            log.info("Returing true....");
 //        User user = userService.findByUsernameAndAuthToken(authId, authToken);
 //        if (user != null) {
 //            return rolesAllowed.contains(user.getAuthRole());
 //        } else {
 //            return false;
 //        }
-        return true;
+            return true;
+        }
     }
-    
+
 }

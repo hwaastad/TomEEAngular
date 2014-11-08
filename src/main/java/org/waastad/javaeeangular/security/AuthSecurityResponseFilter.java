@@ -26,10 +26,11 @@ public class AuthSecurityResponseFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestCtx, ContainerResponseContext responseCtx) throws IOException {
         log.info("Filtering REST Response");
+        responseCtx.getHeaders().add("Access-Control-Request-Headers", "X-Requested-With, accept, content-type");
         responseCtx.getHeaders().add("Access-Control-Allow-Origin", "*");
         responseCtx.getHeaders().add("Access-Control-Allow-Credentials", "true");
         responseCtx.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
-        responseCtx.getHeaders().add("Access-Control-Allow-Headers", AuthAccessElement.PARAM_AUTH_ID + ", " + AuthAccessElement.PARAM_AUTH_TOKEN);
+        responseCtx.getHeaders().add("Access-Control-Allow-Headers", AuthAccessElement.PARAM_AUTH_ID + ", " + AuthAccessElement.PARAM_AUTH_TOKEN + ", content-type");
     }
 
 }
