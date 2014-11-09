@@ -1,0 +1,3 @@
+<p>Home view</p>
+<div ng-controller="navigationController">Welcome, {{currentUser.authId}}</div>
+<div data-ng-controller="navigationController" ng-if="isAuthorized('admin')">You're admin.</div>

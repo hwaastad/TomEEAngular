@@ -5,6 +5,8 @@
  */
 package org.waastad.javaeeangular.service;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -19,7 +21,6 @@ import org.waastad.javaeeangular.controller.ApplicationBean;
  *
  * @author Helge Waastad <helge.waastad@waastad.org>
  */
-@Singleton
 @Path("chartdata")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,12 +30,14 @@ public class ChartService {
     private ApplicationBean applicationBean;
 
     @GET
+    @PermitAll
     public Response getChartData() {
         return Response.ok(applicationBean.getChartData()).build();
     }
     
     @GET
     @Path("pie")
+    @RolesAllowed("admin")
     public Response getPieChartData() {
         return Response.ok(applicationBean.getPieChartData()).build();
     }

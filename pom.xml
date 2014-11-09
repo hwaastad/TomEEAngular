@@ -122,11 +122,13 @@
                     <synchronization>
                         <extensions>
                             <extension>.class</extension>
-                            <extension>.xhtml</extension>
-                            <extension>.html</extension>
-                            <extension>.js</extension>
-                            <extension>.css</extension>
                         </extensions>
+                        <updateOnlyExtensions>
+                            <updateOnlyExtension>.html</updateOnlyExtension>
+                            <updateOnlyExtension>.js</updateOnlyExtension>
+                            <updateOnlyExtension>.jcss</updateOnlyExtension>
+                            <updateOnlyExtension>.css</updateOnlyExtension>
+                        </updateOnlyExtensions>
                     </synchronization>
                     <libs>
                         <lib>org.eclipse.persistence:eclipselink:${eclipselink.version}</lib>
