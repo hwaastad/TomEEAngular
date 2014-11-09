@@ -1,6 +1,6 @@
 'use strict';
 
-var myServices = angular.module('myApp.services', ['ngResource', 'restangular']);
+var myServices = angular.module('myApp.services', ['restangular']);
 myServices.factory('CustomerService', ['Restangular', function (Restangular) {
         var baseCustomers = Restangular.all('customer');
 
@@ -96,10 +96,12 @@ myServices.factory('AuthService', ['$rootScope', 'Restangular', '$window', 'AUTH
                 }
             },
             logout: function () {
+                console.log('AuthService: Logging out');
                 authFactory.authData = undefined;
                 if ($window.sessionStorage.authData) {
                     $window.sessionStorage.authData = null;
                 }
+                return baseCustomers.post();
             }
         };
 

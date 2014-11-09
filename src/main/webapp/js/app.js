@@ -5,35 +5,103 @@
  */
 
 var app = angular.module('myApp', [
-    'ngRoute',
+    'ui.router',
     'myApp.services',
     'myApp.directives',
     'myApp.controllers',
     'restangular',
     'ui.bootstrap'])
-        .config(['$routeProvider', function ($routeProvider, $httpProvider) {
-                $routeProvider.when('/home', {templateUrl: 'partials/home.html'});
-                $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
-                $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'CustomerController'});
-                $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'UserController'});
-                $routeProvider.when('/chart', {templateUrl: 'partials/chart.html', controller: 'ChartController'});
-                $routeProvider.when('/chart2', {templateUrl: 'partials/chart2.html', controller: 'PieChartController'});
-                $routeProvider.when('/secure', {
-                    templateUrl: 'partials/secure.html',
-                    controller: 'SecureController',
-                    resolve: {
-                        auth: ['$q', 'AuthService', function ($q, AuthService) {
-                                var userInfo = AuthService.isAuthenticated();
-                                if (userInfo) {
-                                    return $q.when(userInfo);
-                                } else {
-                                    return $q.reject(({authenticated: false}));
-                                }
-                            }]
-                    }
-                });
+//        .config(['$routeProvider', function ($routeProvider, $httpProvider) {
+//                $routeProvider.when('/home', {templateUrl: 'partials/home.html'});
+//                $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginController'});
+//                $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'CustomerController'});
+//                $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'UserController'});
+//                $routeProvider.when('/chart', {templateUrl: 'partials/chart.html', controller: 'ChartController'});
+//                $routeProvider.when('/chart2', {templateUrl: 'partials/chart2.html', controller: 'PieChartController'});
+//                $routeProvider.when('/secure', {
+//                    templateUrl: 'partials/secure.html',
+//                    controller: 'SecureController',
+//                    resolve: {
+//                        auth: ['$q', 'AuthService', function ($q, AuthService) {
+//                                var userInfo = AuthService.isAuthenticated();
+//                                if (userInfo) {
+//                                    return $q.when(userInfo);
+//                                } else {
+//                                    return $q.reject(({authenticated: false}));
+//                                }
+//                            }]
+//                    }
+//                });
+//
+//                $routeProvider.otherwise({redirectTo: '/login'});
+//            }])
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+                $stateProvider
+                        .state('public', {
+                            abstract: true,
+                            template: "<ui-view>",
+//                            data: {
+//                                access: access.public
+//                            }
+                        })
+                        .state('public.404', {
+                            url: '/404/',
+                            templateUrl: '404'
+                        });
+                $stateProvider
+                        .state('anon', {
+                            abstract: true,
+                            template: "<ui-view/>",
+//                            data: {
+//                                access: access.anon
+//                            }
+                        })
+                        .state('login', {
+                            url: '/login',
+                            templateUrl: 'partials/login.html',
+                            controller: 'LoginController'
+                        })
+                        .state('customer', {
+                            url: '/customer',
+                            templateUrl: 'partials/customer.html',
+                            controller: 'CustomerController'
+                        })
+                        .state('demo', {
+                            url: '/demo',
+                            templateUrl: 'partials/demo.html',
+                            controller: 'UserController'
+                        })
+                        .state('secure', {
+                            url: '/secure',
+                            templateUrl: 'partials/secure.html',
+                            controller: 'SecureController',
+                            resolve: {
+                                auth: ['AuthService', function (AuthService) {
+                                  return AuthService.isAuthenticated();      
+                                }]
+//                                auth: ['$q', 'AuthService', function ($q, AuthService) {
+//                                        var userInfo = AuthService.isAuthenticated();
+//                                        if (userInfo) {
+//                                            return $q.when(userInfo);
+//                                        } else {
+//                                            return $q.reject(({authenticated: false}));
+//                                        }
+//                                    }]
+                            }
+                        })
+                        .state('chart1', {
+                            url: '/chart1',
+                            templateUrl: 'partials/chart.html',
+                            controller: 'ChartController'
+                        })
+                        .state('chart2', {
+                            url: '/chart2',
+                            templateUrl: 'partials/chart2.html',
+                            controller: 'ChartController'
+                        });
 
-                $routeProvider.otherwise({redirectTo: '/login'});
+
+                $urlRouterProvider.otherwise('/404');
             }])
         .config(function (RestangularProvider) {
             RestangularProvider.setBaseUrl('http://localhost:8080');
@@ -42,7 +110,6 @@ var app = angular.module('myApp', [
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('authHttpRequestInterceptor');
         });
-
 app.run(['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
         $rootScope.session = AuthService;
         $rootScope.$on("$routeChangeSuccess", function (authData) {
