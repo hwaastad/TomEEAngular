@@ -7,5 +7,6 @@ This project is diplaying a combination of the following:
 * Restangular
 * Rest Bean Validation
 * Amcharts and descriptives(angularjs) for line and pie charts
-* Simple crud
+* Simple rolebase authentication scheme
+* Simple Crud
 * AngularJS Login/Logout session management
