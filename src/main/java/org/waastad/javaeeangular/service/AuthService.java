@@ -9,8 +9,11 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,24 +33,41 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
 @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 @Slf4j
 public class AuthService {
-    
+
     @Inject
     private AuthServiceBeanLocal authServiceBeanLocal;
-    
+
     @POST
     @PermitAll
-    public AuthAccessElement login(@Context HttpServletRequest request, AuthLoginElement loginElement) {
+    public AuthAccessElement login(@Context HttpServletRequest request, @Valid AuthLoginElement loginElement) {
         log.info("Logging in user: {}", loginElement.toString());
 //        throw new WebApplicationException("Somthing is terribly wrong here...");
 
-        AuthAccessElement login = authServiceBeanLocal.login(loginElement);
+        AuthAccessElement login = authServiceBeanLocal.login(loginElement.getUsername(), loginElement.getPassword());
         if (login != null) {
             request.getSession().setAttribute(AuthAccessElement.PARAM_AUTH_ID, login.getAuthId());
             request.getSession().setAttribute(AuthAccessElement.PARAM_AUTH_TOKEN, login.getAuthToken());
         }
         return login;
     }
-    
+
+    @POST
+    @Path("form")
+    @PermitAll
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public AuthAccessElement loginForm(@Context HttpServletRequest request,
+            @FormParam("username") @NotNull String username, @FormParam("password") @NotNull String password) {
+        log.info("Logging in user: {}", username);
+//        throw new WebApplicationException("Somthing is terribly wrong here...");
+
+        AuthAccessElement login = authServiceBeanLocal.login(username,password);
+        if (login != null) {
+            request.getSession().setAttribute(AuthAccessElement.PARAM_AUTH_ID, login.getAuthId());
+            request.getSession().setAttribute(AuthAccessElement.PARAM_AUTH_TOKEN, login.getAuthToken());
+        }
+        return login;
+    }
+
     @DELETE
     @PermitAll
     public void logout(@Context HttpServletRequest requestContext) {

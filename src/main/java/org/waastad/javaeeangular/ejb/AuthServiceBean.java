@@ -10,7 +10,6 @@ import java.util.UUID;
 import javax.ejb.Stateless;
 import lombok.extern.slf4j.Slf4j;
 import org.waastad.javaeeangular.model.AuthAccessElement;
-import org.waastad.javaeeangular.model.AuthLoginElement;
 
 /**
  *
@@ -21,10 +20,10 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
 public class AuthServiceBean implements AuthServiceBeanLocal {
 
     @Override
-    public AuthAccessElement login(AuthLoginElement loginElement) {
-        log.info("Log in user: {}", loginElement.getUsername());
+    public AuthAccessElement login(String username,String password) {
+        log.info("Log in user: {}", username);
         //Lookup User from db and create token etc if not null and save user with token.....
-        return new AuthAccessElement(loginElement.getUsername(), UUID.randomUUID().toString(), "admin");
+        return new AuthAccessElement(username, UUID.randomUUID().toString(), "admin");
 
         // oterwise return null
     }

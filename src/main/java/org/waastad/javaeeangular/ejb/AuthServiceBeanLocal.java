@@ -8,7 +8,6 @@ package org.waastad.javaeeangular.ejb;
 import java.util.Set;
 import javax.ejb.Local;
 import org.waastad.javaeeangular.model.AuthAccessElement;
-import org.waastad.javaeeangular.model.AuthLoginElement;
 
 /**
  *
@@ -17,7 +16,7 @@ import org.waastad.javaeeangular.model.AuthLoginElement;
 @Local
 public interface AuthServiceBeanLocal {
 
-    AuthAccessElement login(AuthLoginElement loginElement);
+    AuthAccessElement login(String username,String password);
 
     boolean isAuthorized(String authId, String authToken, Set<String> rolesAllowed);
 }

@@ -6,6 +6,7 @@
 package org.waastad.javaeeangular.model;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,7 +18,9 @@ public class AuthLoginElement implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     private String username;
+    @NotNull
     private String password;
 
     public AuthLoginElement() {
