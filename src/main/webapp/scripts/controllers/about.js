@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the swFrontApp
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .controller('AboutCtrl', function ($scope) {
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',

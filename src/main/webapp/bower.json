@@ -1,0 +1,13 @@
+{
+    "name": "angular-seed",
+    "description": "A starter project for AngularJS",
+    "version": "0.0.0",
+    "homepage": "https://github.com/angular/angular-seed",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "tv4": "~1.0.15",
+        "objectpath": "~1.0.4",
+        "angular-schema-form": "~0.7.6"
+    }
+}

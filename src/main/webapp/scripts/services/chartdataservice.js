@@ -7,7 +7,7 @@
  * # ChartDataService
  * Factory in the swFrontApp.
  */
-angular.module('JavaEEAngular').factory('ChartDataService', function ($q, $http, AlertService) {
+angular.module('TomEEAngular').factory('ChartDataService', function ($q, $http, AlertService) {
     var service = {
         getChartData: function () {
             var response = {};

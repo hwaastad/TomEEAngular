@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings id="_14160550274011" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:ns4="http://nbmodeler.java.net" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:package>org.waastad.javaeeangular.entity</jpa:package>
+    <jpa:entity class="Person" visibile="true" minimized="false" id="_1416055040096">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_14160550464495">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="String" visibile="true" id="_141605874904616">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:one-to-many name="attributeCollection" target-entity="PersonAtribute" collection-type="java.util.Collection" connected-entity-id="_1416055094145" visibile="true" id="_14160551114067">
+                <jpa:join-table/>
+            </jpa:one-to-many>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="PersonAtribute" visibile="true" minimized="false" id="_1416055094145">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_14160551171218">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+            <jpa:basic name="required" attribute-type="Boolean" visibile="true" id="_141605531693014">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic name="regexp" attribute-type="String" visibile="true" id="_141605532024215">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many name="optionCollection" target-entity="Option" collection-type="java.util.Collection" connected-entity-id="_1416055204247" visibile="true" id="_141605523591611">
+                <jpa:join-table/>
+            </jpa:one-to-many>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Option" visibile="true" minimized="false" id="_1416055204247">
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="Long" visibile="true" id="_141605521885010">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="String" visibile="true" id="_141605527669812">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic name="value" attribute-type="String" visibile="true" id="_141605527819413">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram id="_14160550274012">
+        <plane elementRef="_14160550274011" id="_14160550274013_p">
+            <shape elementRef="_1416055040096" id="_1416055040096_gui">
+                <Bounds x="104.0" y="101.0" width="173.0" height="118.0"/>
+            </shape>
+            <shape elementRef="_1416055094145" id="_1416055094145_gui">
+                <Bounds x="354.0" y="101.0" width="204.0" height="138.0"/>
+            </shape>
+            <shape elementRef="_1416055204247" id="_1416055204247_gui">
+                <Bounds x="623.0" y="101.0" width="144.0" height="106.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>

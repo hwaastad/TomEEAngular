@@ -6,7 +6,7 @@
  * @description
  * # amPie
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .directive('amPie', function () {
             return {
                 restrict: 'E',

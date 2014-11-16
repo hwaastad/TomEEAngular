@@ -8,13 +8,16 @@
  *
  * Main module of the application.
  */
-angular.module('JavaEEAngular', [
+angular.module('TomEEAngular', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'dynform',
+    'schemaForm',
+    'ngTable'
 ])
 
         .factory('authInterceptor', function ($q, $location) {
@@ -81,6 +84,16 @@ angular.module('JavaEEAngular', [
                         templateUrl: 'views/piechart.html',
                         controller: 'PieChartsCtrl'
                     })
+                    .state('anon.persons', {
+                        url: '/persons',
+                        templateUrl: 'views/person/persons.html',
+                        controller: 'PersonCtrl'
+                    })
+                    .state('anon.personsnew', {
+                        url: '/persons/new',
+                        templateUrl: 'views/person/person_new.html',
+                        controller: 'PersonCtrl'
+                    })
                     .state('anon.home', {
                         url: '/home',
                         templateUrl: 'views/main.html',
@@ -91,6 +104,11 @@ angular.module('JavaEEAngular', [
                         templateUrl: 'views/about.html',
                         controller: 'AboutCtrl'
                     })
+                    .state('anon.dynamicform', {
+                            url: '/dynamicform',
+                            templateUrl: 'views/dynamicform.html',
+                            controller: 'DynamicFormCtrl'
+                        })
                     .state('anon.login', {
                         url: '/login',
                         templateUrl: 'views/login.html',

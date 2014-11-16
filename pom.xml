@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.waastad</groupId>
-    <artifactId>JavaEEAngular</artifactId>
+    <artifactId>TomEEAngular</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>JavaEEAngular</name>
+    <name>TomEEAngular</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -16,8 +16,8 @@
         <openejb.version>5.0.0-SNAPSHOT</openejb.version>
         <eclipselink.version>2.5.2</eclipselink.version>
         <ee.version>7.0-SNAPSHOT</ee.version>
+        <ds.version>1.1.0</ds.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.openejb</groupId>
@@ -50,17 +50,65 @@
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-api</artifactId>
-            <version>2.1.15</version>
+            <version>2.2.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-cxf-rs</artifactId>
-            <version>4.7.1</version>
+            <version>${openejb.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jsonSchema</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.12.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>${eclipselink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-api</artifactId>
+            <version>${ds.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-data-module-impl</artifactId>
+            <version>${ds.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <version>${ds.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>${ds.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.2-GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.nosql</artifactId>
+            <version>${eclipselink.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -133,16 +181,12 @@
                     <libs>
                         <lib>org.eclipse.persistence:eclipselink:${eclipselink.version}</lib>
                         <lib>org.eclipse.persistence:org.eclipse.persistence.nosql:${eclipselink.version}</lib>
-                        <lib>org.mongodb:mongo-java-driver:2.12.3</lib>
-                        <lib>com.microsoft.sqlserver:sqljdbc4:4.0</lib>
-                        <lib>mysql:mysql-connector-java:5.1.33</lib>
-                        <lib>org.postgresql:postgresql:9.3-1102-jdbc4</lib>
+                        <lib>org.mongodb:mongo-java-driver:2.12.4</lib>
                         <lib>remove:geronimo-javamail</lib>
                         <lib>com.sun.mail:javax.mail:1.5.1</lib>
                         <lib>org.apache.geronimo.specs:geronimo-osgi-locator:1.1</lib>
                         <lib>javax.enterprise.concurrent:javax.enterprise.concurrent-api:1.0</lib>
-                        <lib>org.apache.openejb:openejb-concurrency-utilities-ee:${openejb.version}</lib>
-                            
+                        <lib>org.apache.openejb:openejb-concurrency-utilities-ee:${openejb.version}</lib>                          
                         <lib>org.springframework:spring-beans:2.5.6</lib>
                         <lib>org.springframework:spring-context:2.5.6</lib>
                         <lib>org.springframework:spring-core:2.5.6</lib>
@@ -156,21 +200,50 @@
                     <removeDefaultWebapps>true</removeDefaultWebapps>
                 </configuration>
             </plugin>
-            <!--  <plugin>
-                <groupId>org.primefaces.extensions</groupId>
-                <artifactId>resources-optimizer-maven-plugin</artifactId>
-                <version>1.1.0</version>
+          <!--  <plugin>
+                <groupId>com.ethlo.persistence.tools</groupId>
+                <artifactId>eclipselink-maven-plugin</artifactId>
+                <version>1.1-SNAPSHOT</version>
                 <executions>
                     <execution>
-                        <id>optimize</id>
+                        <id>weave</id>
+                        <phase>process-classes</phase>
                         <goals>
-                            <goal>optimize</goal>
+                            <goal>weave</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>modelgen</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>modelgen</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <inputDir>${project.build.directory}/your_resource_directory</inputDir>
-                </configuration>
+            </plugin>-->
+            <!--  <plugin>
+                <groupId>de.empulse.eclipselink</groupId>
+                <artifactId>staticweave-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>weave</goal>
+                        </goals>
+                        <configuration>
+                            <persistenceXMLLocation>META-INF/persistence.xml</persistenceXMLLocation>
+                            <logLevel>FINE</logLevel>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>org.eclipse.persistence.jpa</artifactId>
+                        <version>${eclipselink.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>-->
         </plugins>
     </build>
@@ -191,6 +264,10 @@
             <id>apache-m2-snapshot-plugin</id>
             <name>Apache Snapshot Repository</name>
             <url>http://repository.apache.org/snapshots</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>ethlo</id>
+            <url>http://ethlo.com/maven</url>
         </pluginRepository>
     </pluginRepositories>
 </project>

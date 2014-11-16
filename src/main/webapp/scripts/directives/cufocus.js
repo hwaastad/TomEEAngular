@@ -6,7 +6,7 @@
  * @description
  * # cuFocus
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .directive('cuFocus', function () {
             return {
                 restrict: 'A',

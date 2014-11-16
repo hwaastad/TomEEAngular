@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .controller('navigationController', function ($scope, $location, auth) {
 
             $scope.isLoggedIn = auth.isLoggedIn;

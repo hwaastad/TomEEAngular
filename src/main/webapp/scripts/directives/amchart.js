@@ -6,7 +6,7 @@
  * @description
  * # amChart
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .directive('amChart', function () {
             return {
                 restrict: 'E',

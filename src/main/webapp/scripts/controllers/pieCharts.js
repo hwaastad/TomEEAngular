@@ -7,7 +7,7 @@
  * # ChartsCtrl
  * Controller of the swFrontApp
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .controller('PieChartsCtrl', function ($scope, ChartDataService) {
             $scope.chartData = {};
 

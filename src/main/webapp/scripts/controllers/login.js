@@ -7,7 +7,7 @@
  * # LoginCtrl
  * Controller of the swFrontApp
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .controller('LoginCtrl', function ($scope, auth, $location) {
             $scope.login = function () {
                 if ($scope.loginForm.$valid) {

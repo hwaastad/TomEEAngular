@@ -6,7 +6,7 @@
  * @description
  * # navbar
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .directive('navbar', function () {
             return {
                 templateUrl: 'views/tpl/navbar.tpl.html',

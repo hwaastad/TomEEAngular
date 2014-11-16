@@ -7,7 +7,7 @@
  * # auth
  * Factory in the swFrontApp.
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .factory('auth', function ($q, $http, $rootScope, $location, AlertService, USER_ROLES) {
 
             var authData = undefined;

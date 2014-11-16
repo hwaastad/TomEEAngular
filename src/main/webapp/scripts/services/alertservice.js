@@ -7,7 +7,7 @@
  * # AlertService
  * Factory in the swFrontApp.
  */
-angular.module('JavaEEAngular').factory('AlertService', function ($timeout, $rootScope) {
+angular.module('TomEEAngular').factory('AlertService', function ($timeout, $rootScope) {
     $rootScope.alerts = [];
     var service = {
         add: function (type, title, msg, timeout) {

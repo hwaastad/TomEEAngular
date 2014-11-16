@@ -7,6 +7,6 @@
  * # MainCtrl
  * Controller of the swFrontApp
  */
-angular.module('JavaEEAngular')
+angular.module('TomEEAngular')
         .controller('MainCtrl', function ($scope) {
         });
