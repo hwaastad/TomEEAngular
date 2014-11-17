@@ -13,7 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.apache.bval.constraints.NotEmpty;
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
@@ -24,6 +27,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
     @NamedQuery(name = Person.FIND_ATTRIBUTE_BY_NAME, query = "SELECT t3.name FROM Person t JOIN t.attributeCollection t2 JOIN t2.optionCollection t3 where t3.name=:name"),
     @NamedQuery(name = "test", query = "SELECT COUNT(t2) FROM Person t JOIN t.attributeCollection t2")
 })
+@XmlRootElement
 public class Person implements Serializable {
 
     public static final String FIND_ATTRIBUTE_BY_NAME = "Person.findByAttName";
@@ -35,8 +39,12 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue()
     private String id;
-    @NotNull
+    @NotNull(message = "name may not be null")
     private String name;
+    @NotNull(message = "age may not be null")
+    private Integer age;
+    @NotNull(message = "number may not be null")
+    private Integer number;
 
     @ElementCollection
     @JsonProperty("attributes")
@@ -46,12 +54,20 @@ public class Person implements Serializable {
 
     }
 
-    public Person(String name) {
-        this.name = name;
+    public Integer getAge() {
+        return age;
     }
 
     public String getId() {
         return this.id;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public void setId(String id) {
@@ -75,6 +91,10 @@ public class Person implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
 }
