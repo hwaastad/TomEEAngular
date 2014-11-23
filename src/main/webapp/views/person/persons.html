@@ -1,10 +1,9 @@
-<p></p>
 <div class="col-md-8">
     <table ng-table="tableParams" class="table">
         <tr ng-repeat="user in persons">
             <td data-title="'Id'">{{user.id}}</td>
             <td data-title="'Name'">{{user.name}}</td>
-            <td data-title='Action'><button class="btn btn-default" ng-click="deletePerson(user)">Delete</button></td>
+            <td data-title='Action'><button class="btn btn-default" ng-click="confirmDelete()">Delete</button></td>
         </tr>
     </table>
 </div>

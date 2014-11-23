@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('TomEEAngular')
-        .controller('PersonCtrl', function ($scope, $location, personService, AlertService, ngTableParams) {
+        .controller('PersonCtrl', function ($scope, $location, personService, AlertService, $modal) {
             $scope.persons = [];
             $scope.person = {};
 
@@ -27,5 +27,27 @@ angular.module('TomEEAngular')
                     AlertService.add('danger', 'Person delete failed: ', status.status);
                 });
             };
+
+            $scope.confirmDelete = function (size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'views/person/confirmDeletePerson.html',
+                    controller: 'PersonCtrl',
+                    size: size,
+                    resolve: {
+                        items: function () {
+                            return $scope.items;
+                        }
+                    }
+                });
+            };
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected.item);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+
         });
 

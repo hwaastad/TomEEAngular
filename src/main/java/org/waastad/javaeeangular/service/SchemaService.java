@@ -26,7 +26,7 @@ import org.apache.commons.collections4.Predicate;
 import org.waastad.javaeeangular.entity.Option;
 import org.waastad.javaeeangular.entity.Person;
 import org.waastad.javaeeangular.entity.PersonAtribute;
-import org.waastad.javaeeangular.respository.PersonRepository;
+import org.waastad.javaeeangular.repository.PersonRepository;
 
 /**
  *

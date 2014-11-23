@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.waastad.javaeeangular.respository;
+package org.waastad.javaeeangular.repository;
 
 import java.util.List;
 import org.apache.deltaspike.data.api.AbstractEntityRepository;

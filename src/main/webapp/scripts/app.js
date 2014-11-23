@@ -9,6 +9,7 @@
  * Main module of the application.
  */
 angular.module('TomEEAngular', [
+    'ui.bootstrap',
     'ngAnimate',
     'ngCookies',
     'ngResource',
