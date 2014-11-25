@@ -1,25 +1,26 @@
-<form class="form-horizontal" role="form" ng-submit="createPerson(person)">
-    <div class="form-group">
+<form class="form" name="personForm" role="form" novalidate ng-submit="createPerson(person)">
+    <div class="form-group" ng-class="{'has-error' : personForm.name.$invalid && personForm.name.$dirty,'has-success' : personForm.name.$valid && personForm.name.$dirty}">
         <label for="name" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-            <input type="text" ng-model="person.name" class="form-control" id="name" placeholder="Person Name Here" required="true"/>
-        </div>
+        <input id="name" type="text" ng-model="person.name" class="form-control" name="name" placeholder="Person Name Here" required cu-focus/>
+        <p class="help-block" ng-show="personForm.name.$invalid && personForm.name.$dirty && !personForm.name.$focused">
+            Name wrong format
+        </p>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error' : personForm.age.$invalid && personForm.age.$dirty,'has-success' : personForm.age.$valid && personForm.age.$dirty}">
         <label for="age" class="col-sm-2 control-label">Age</label>
-        <div class="col-sm-10">
-            <input type="number" ng-model="person.age" class="form-control" id="age" placeholder="Person age Here" required="true"/>
-        </div>
+        <input id="age" type="number" ng-model="person.age" class="form-control" name="age" placeholder="Person age Here" required cu-focus/>
+        <p class="help-block" ng-show="personForm.age.$invalid && personForm.age.$dirty && !personForm.age.$focused">
+            Age wrong format
+        </p>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error' : personForm.number.$invalid && personForm.number.$dirty,'has-success' : personForm.number.$valid && personForm.number.$dirty}">
         <label for="number" class="col-sm-2 control-label">Number</label>
-        <div class="col-sm-10">
-            <input type="number" ng-model="person.number" class="form-control" id="number" placeholder="Person number Here" required="true"/>
-        </div>
+        <input id="number" type="number" ng-model="person.number" class="form-control" name="number" placeholder="Person number Here" required cu-focus/>
+        <p class="help-block" ng-show="personForm.number.$invalid && personForm.number.$dirty && !personForm.number.$focused">
+            Number wrong format
+        </p>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="submit" class="btn btn-primary" value="Save"/>
-        </div>
+        <input type="submit" class="btn btn-primary" value="Save" ng-disabled="personForm.$invalid"/>
     </div>
 </form>
