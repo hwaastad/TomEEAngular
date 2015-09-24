@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('TomEEAngular')
-        .controller('PersonCtrl', function ($scope, $location, personService, AlertService, $modal) {
+        .controller('PersonCtrl', function ($scope, $location, personService, AlertService, modalService) {
             $scope.persons = [];
             $scope.person = {};
 
@@ -28,25 +28,31 @@ angular.module('TomEEAngular')
                 });
             };
 
-            $scope.confirmDelete = function (size) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'views/person/confirmDeletePerson.html',
-                    controller: 'PersonCtrl',
-                    size: size,
-                    resolve: {
-                        items: function () {
-                            return $scope.items;
-                        }
-                    }
+            $scope.confirmDelete = function (person) {
+                var modalOptions = {
+                    closeButtonText: 'Cancel',
+                    actionButtonText: 'Delete Person',
+                    headerText: 'Delete ' + person.name + '?',
+                    bodyText: 'Are you sure you want to delete this person?'
+                };
+
+                modalService.showModal({}, modalOptions).then(function (result) {
+                    personService.deletePerson(person).then(function (data) {
+                        AlertService.add('success', 'Person delete OK');
+                        $scope.persons = _.without($scope.persons, person);
+                        $location.path('/persons');
+                    }).catch(function (status) {
+                        AlertService.add('danger', 'Person delete failed: ', status.status);
+                    });
                 });
             };
 
             $scope.ok = function () {
-                $modalInstance.close($scope.selected.item);
+                $scope.showModal = false;
             };
 
             $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
+                $scope.showModal = false;
             };
 
         });

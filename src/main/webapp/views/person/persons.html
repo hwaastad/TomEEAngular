@@ -3,8 +3,9 @@
         <tr ng-repeat="user in persons">
             <td data-title="'Id'">{{user.id}}</td>
             <td data-title="'Name'">{{user.name}}</td>
-            <td data-title='Action'><button class="btn btn-default" ng-click="confirmDelete()">Delete</button></td>
+            <td data-title='Action'><button class="btn btn-default" ng-click="confirmDelete(user)">Delete</button></td>
         </tr>
     </table>
 </div>
+
 
