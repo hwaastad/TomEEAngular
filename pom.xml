@@ -98,6 +98,11 @@
             <version>${ds.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.20.0-GA</version>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.nosql</artifactId>
             <version>${eclipselink.version}</version>
@@ -183,10 +188,8 @@
                         <lib>org.eclipse.persistence:org.eclipse.persistence.nosql:${eclipselink.version}</lib>
                         <lib>org.mongodb:mongo-java-driver:2.13.0</lib>
                         <lib>remove:geronimo-javamail</lib>
-                        <lib>com.sun.mail:javax.mail:1.5.1</lib>
+                        <lib>com.sun.mail:javax.mail:1.5.3</lib>
                         <lib>org.apache.geronimo.specs:geronimo-osgi-locator:1.1</lib>
-                        <!-- <lib>javax.enterprise.concurrent:javax.enterprise.concurrent-api:1.0</lib>
-                        <lib>org.apache.openejb:openejb-concurrency-utilities-ee:${openejb.version}</lib>-->
                         <lib>org.springframework:spring-beans:2.5.6</lib>
                         <lib>org.springframework:spring-context:2.5.6</lib>
                         <lib>org.springframework:spring-core:2.5.6</lib>
